@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Test de evaluare inițială – Informatică, clasa a IX-a</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;600;700&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f6f4ee;--card:#fff;--ink:#1c2321;--mut:#5d6763;--line:#dcd8cc;--acc:#0b6b5c;--ok:#1d7a3e;--okbg:#e4f3e8;--bad:#b3261e;--badbg:#fbe9e7;--sel:#e3f0ed;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#141816;--card:#1e2422;--ink:#e9eeec;--mut:#9aa6a1;--line:#333c39;--acc:#4fc3ad;--ok:#6fd08c;--okbg:#1c3325;--bad:#ff8a80;--badbg:#3a1f1c;--sel:#22403a}}
+:root[data-theme="dark"]{--bg:#141816;--card:#1e2422;--ink:#e9eeec;--mut:#9aa6a1;--line:#333c39;--acc:#4fc3ad;--ok:#6fd08c;--okbg:#1c3325;--bad:#ff8a80;--badbg:#3a1f1c;--sel:#22403a}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 "IBM Plex Sans",system-ui,sans-serif}
+main{max-width:760px;margin:0 auto;padding:24px 16px 60px}
+h1{font-size:1.7rem;line-height:1.2;margin:.2em 0}
+.tag{font:500 .8rem "IBM Plex Mono",monospace;color:var(--acc);letter-spacing:.06em;text-transform:uppercase}
+.note{color:var(--mut);font-size:.95rem}
+.name{width:100%;box-sizing:border-box;padding:10px 12px;margin:14px 0 4px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--ink);font:inherit}
+h2{font-size:1rem;margin:32px 0 10px;padding-bottom:6px;border-bottom:2px solid var(--acc)}
+.q{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 16px;margin:12px 0}
+.q.ok{border-color:var(--ok);background:var(--okbg)}.q.bad{border-color:var(--bad);background:var(--badbg)}
+.q p{margin:0 0 8px;font-weight:600}
+.pt{font:500 .8rem "IBM Plex Mono",monospace;color:var(--acc)}
+label.o{display:flex;gap:10px;align-items:flex-start;padding:8px 10px;border-radius:8px;cursor:pointer}
+label.o:hover{background:var(--sel)}
+label.o input{margin-top:5px}
+.m{display:flex;gap:10px;align-items:center;margin:6px 0}
+.m select{padding:6px;border-radius:6px;border:1px solid var(--line);background:var(--card);color:var(--ink);font:inherit}
+.fb{margin-top:8px;font-size:.92rem}
+button{background:var(--acc);color:#fff;border:0;border-radius:8px;padding:12px 22px;font:600 1rem inherit;font-family:inherit;cursor:pointer;margin-top:20px}
+:root:not([data-theme="light"]) button{color:#0b1512}
+button.sec{background:transparent;color:var(--acc);border:1px solid var(--acc)}
+#res{display:none;background:var(--card);border:2px solid var(--acc);border-radius:12px;padding:22px;margin:24px 0;text-align:center}
+#score{font:700 3.2rem "IBM Plex Mono",monospace;color:var(--acc);line-height:1}
+#msg{font-size:1.2rem;font-weight:600;margin:10px 0 4px}
+</style>
+</head>
+<body>
+<main>
+<div class="tag">Informatică și TIC · Clasa a IX-a</div>
+<h1>Test de evaluare inițială</h1>
+<p class="note">Toate subiectele sunt obligatorii. Se acordă 10 puncte din oficiu. Timp de lucru: 45 de minute.</p>
+<input class="name" id="nm" placeholder="Numele și prenumele elevului">
+
+<div id="res">
+  <div class="note">Punctajul tău</div>
+  <div id="score"></div>
+  <div id="msg"></div>
+  <div class="note" id="det"></div>
+  <button class="sec" onclick="location.reload()">Reia testul</button>
+</div>
+
+<form onsubmit="return false" id="f"></form>
+<button id="sub" onclick="grade()">Trimite testul</button>
+</main>
+
+<script>
+var T=[
+{h:"PARTEA I (40 de puncte) – O singură variantă corectă și Adevărat / Fals"},
+{t:"s",p:5,q:"Care dintre următoarele componente face parte din memoria internă a calculatorului?",o:["Hard Disk-ul (HDD)","Unitatea Memorie Flash (Stick USB)","Memoria RAM","Placa video dedicată"],a:[2]},
+{t:"s",p:5,q:"În Microsoft Word, ce scurtătură de tastatură se folosește în mod obișnuit pentru a salva rapid documentul curent?",o:["Ctrl + P","Ctrl + C","Ctrl + S","Ctrl + V"],a:[2]},
+{t:"s",p:5,q:"În Microsoft Excel, cu ce simbol începe întotdeauna introducerea unei formule sau a unei funcții într-o celulă?",o:["#","=","$","%"],a:[1]},
+{t:"s",p:5,q:"În Microsoft PowerPoint, care este elementul de bază al unei prezentări?",o:["Foaia de calcul","Paragraful","Diapozitivul (Slide-ul)","Baza de date"],a:[2]},
+{t:"s",p:5,q:"În Microsoft Excel, ce funcție este utilizată pentru a calcula suma unui interval de celule (de exemplu, de la A1 până la A10)?",o:["AVERAGE","MAX","SUM","COUNT"],a:[2]},
+{t:"s",p:5,q:"În Microsoft PowerPoint, opțiunea „Tranziție” (Transition) se aplică între:",o:["Elemente grafice de pe același slide","Diapozitive consecutive ale prezentării","Culorile fundalului și textul scris","Animațiile unui singur obiect"],a:[1]},
+{t:"s",p:5,q:"Care dintre următoarele fișiere este specific aplicației Microsoft Excel?",o:["document.docx","prezentare.pptx","buget.xlsx","imagine.png"],a:[2]},
+{t:"s",p:5,q:"Procesorul (CPU) este „creierul” calculatorului deoarece efectuează calcule aritmetice și logice.",o:["Adevărat","Fals"],a:[0]},
+{h:"PARTEA A II-A (30 de puncte) – Variante multiple și Adevărat / Fals"},
+{t:"m",p:7.5,q:"Care dintre următoarele acțiuni reprezintă bune practici de securitate și siguranță online? (Selectează două variante)",o:["Folosirea aceleiași parole simple pentru toate conturile online.","Utilizarea autentificării în doi pași (2FA) oriunde este disponibilă.","Accesarea link-urilor suspecte primite de la expeditori necunoscuți.","Actualizarea periodică a sistemului de operare și a aplicațiilor de securitate."],a:[1,3]},
+{t:"m",p:7.5,q:"Care dintre următoarele dispozitive sunt periferice de ieșire (output)? (Selectează două variante)",o:["Tastatura","Monitorul","Mouse-ul","Imprimanta"],a:[1,3]},
+{t:"s",p:7.5,q:"Phishing-ul reprezintă o tehnică informatică inofensivă utilizată pentru optimizarea căutărilor pe internet.",o:["Adevărat","Fals"],a:[1]},
+{t:"s",p:7.5,q:"Parolele puternice ar trebui să conțină o combinație de litere mari și mici, cifre și caractere speciale.",o:["Adevărat","Fals"],a:[0]},
+{h:"PARTEA A III-A (20 de puncte) – Asocieri și completări"},
+{t:"a",p:6,q:"Asociază aplicația Microsoft Office cu funcția sa principală (câte 2 puncte pentru fiecare asociere corectă):",L:["Microsoft Word","Microsoft Excel","Microsoft PowerPoint"],R:["Calcul tabelar, tabele de date și diagrame","Crearea de prezentări multimedia cu diapozitive","Editare și tehnoredactare de documente text"],a:[2,0,1]},
+{t:"s",p:7,q:"Sistemul de operare este un software de sistem care gestionează resursele hardware și software ale calculatorului.",o:["Adevărat","Fals"],a:[0]},
+{t:"s",p:7,q:"Cum se numește extensia implicită a fișierelor salvate în cea mai recentă versiune a programului Microsoft Word?",o:[".doc",".docx",".xls",".txt"],a:[1]}
+];
+var f=document.getElementById('f'),n=0,Q=[];
+T.forEach(function(x){
+  if(x.h){var h=document.createElement('h2');h.textContent=x.h;f.appendChild(h);return}
+  n++;x.n=n;Q.push(x);
+  var d=document.createElement('div');d.className='q';d.id='q'+n;
+  var s='<p>'+n+'. <span class="pt">('+String(x.p).replace('.',',')+'p)</span> '+x.q+'</p>';
+  if(x.t=='a'){
+    x.L.forEach(function(l,i){
+      s+='<div class="m"><span>'+(i+1)+'. '+l+' →</span><select id="a'+n+'_'+i+'"><option value="">alege…</option>';
+      x.R.forEach(function(r,j){s+='<option value="'+j+'">'+'ABC'[j]+'. '+r+'</option>'});
+      s+='</select></div>';
+    });
+  } else {
+    x.o.forEach(function(o,i){
+      s+='<label class="o"><input type="'+(x.t=='m'?'checkbox':'radio')+'" name="q'+n+'" value="'+i+'"><span>'+'abcd'[i]+') '+o+'</span></label>';
+    });
+  }
+  s+='<div class="fb"></div>';
+  d.innerHTML=s;f.appendChild(d);
+});
+function grade(){
+  var tot=10,det=[];
+  Q.forEach(function(x){
+    var got=0,ok=false,ans='';
+    if(x.t=='a'){
+      var c=0;
+      x.a.forEach(function(r,i){var v=document.getElementById('a'+x.n+'_'+i).value;if(v!==''&&+v===r)c++});
+      got=c*2;ok=c==3;
+      ans=x.L.map(function(l,i){return (i+1)+' – '+'ABC'[x.a[i]]}).join('; ');
+    } else {
+      var sel=[].map.call(document.querySelectorAll('input[name=q'+x.n+']:checked'),function(e){return +e.value});
+      ok=sel.length==x.a.length&&x.a.every(function(v){return sel.indexOf(v)>-1});
+      got=ok?x.p:0;
+      ans=x.a.map(function(i){return 'abcd'[i]+') '+x.o[i]}).join(' și ');
+    }
+    tot+=got;
+    var d=document.getElementById('q'+x.n);
+    d.className='q '+(ok?'ok':(got>0?'':'bad'));
+    d.querySelector('.fb').innerHTML=(ok?'✓ Corect':'✗ '+(got>0?'Parțial':'Incorect'))+' — '+String(got).replace('.',',')+' / '+String(x.p).replace('.',',')+'p'+(ok?'':'<br>Răspuns corect: '+ans);
+    x.got=got;
+  });
+  var m;
+  if(tot<50)m='Mai exersează!';
+  else if(tot<=70)m='Ai cunoștințe, dar mai trebuie să înveți.';
+  else if(tot<=80)m='Este bine... se putea și mai bine.';
+  else m='Felicitări, ai obținut un punctaj bun!';
+  var nm=document.getElementById('nm').value.trim();
+  document.getElementById('score').textContent=String(tot).replace('.',',')+' / 100';
+  document.getElementById('msg').textContent=m;
+  document.getElementById('det').textContent=(nm?nm+' · ':'')+'inclusiv 10 puncte din oficiu';
+  var r=document.getElementById('res');r.style.display='block';
+  document.getElementById('sub').style.display='none';
+  r.scrollIntoView({behavior:'smooth',block:'start'});
+}
+</script>
+</body>
+</html>
